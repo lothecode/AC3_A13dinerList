@@ -35,9 +35,27 @@ app.get('/places', (req, res) => {
   return res.redirect('/')
 })
 
-// create new one
-app.get('/places/add', (req, res) => {
+// create new one (to new page)
+app.get('/places/create', (req, res) => {
   res.render('new')
+})
+app.post('/places', (req, res) => {
+  // console.log(req.body)
+  const eatplace = new Eatplace({
+    name: req.body.name,
+    name_en: req.body.nameEn,
+    category: req.body.category,
+    image: req.body.image,
+    location: req.body.location,
+    phone: req.body.phone,
+    google_map: req.body.googleMapp,
+    rating: req.body.rating,
+    description: req.body.description,
+  })
+  eatplace.save((err) => {
+    if (err) return console.log(err)
+    return res.redirect('/')
+  })
 })
 
 // see one's detail
@@ -50,6 +68,7 @@ app.get('/places/:id', (req, res) => {
   })
 })
 // edit one
+
 
 // delete one
 
