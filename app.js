@@ -39,7 +39,7 @@ app.get('/places', (req, res) => {
 app.get('/places/create', (req, res) => {
   res.render('new')
 })
-app.post('/places', (req, res) => {
+app.post('/places/create', (req, res) => {
   // console.log(req.body)
   const eatplace = new Eatplace({
     name: req.body.name,
@@ -48,7 +48,7 @@ app.post('/places', (req, res) => {
     image: req.body.image,
     location: req.body.location,
     phone: req.body.phone,
-    google_map: req.body.googleMapp,
+    google_map: req.body.googleMap,
     rating: req.body.rating,
     description: req.body.description,
   })
@@ -68,10 +68,39 @@ app.get('/places/:id', (req, res) => {
   })
 })
 // edit one
-
+app.get('/places/:id/edit', (req, res) => {
+  Eatplace.findById(req.params.id, (err, eatplace) => {
+    if (err) return console.log(err)
+    return res.render('edit', { eatplace: eatplace })
+  })
+})
+app.post('/places/:id', (req, res) => {
+  Eatplace.findById(req.params.id, (err, eatplace) => {
+    if (err) return console.log(err)
+    eatplace.name = req.body.name,
+      eatplace.name_en = req.body.nameEn,
+      eatplace.category = req.body.category,
+      eatplace.image = req.body.image,
+      eatplace.location = req.body.location,
+      eatplace.phone = req.body.phone,
+      eatplace.google_map = req.body.googleMap,
+      eatplace.rating = req.body.rating,
+      eatplace.description = req.body.description,
+      eatplace.save((err) => {
+        if (err) return console.log(err)
+        return res.redirect(`/places/${req.params.id}`)
+      })
+  })
+})
 
 // delete one
-
+app.post('/places/:id/delete', (req, res) => {
+  Eatplace.findById(req.params.id, (err, eatplace) => {
+    if (err) return console.log(err)
+    eatplace.remove()
+    return res.redirect('/')
+  })
+})
 
 app.listen(port, () => {
   console.log('express app is running')

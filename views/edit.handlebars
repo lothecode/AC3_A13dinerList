@@ -1,64 +1,63 @@
 <div class="container my-4">
-  <form action="/places/create" method="POST">
+  <form action="/places/{{{eatplace.id}}}" method="POST">
     <div class="form-group row">
       <label for="name" class="col-sm-2 col-form-label">餐廳名稱</label>
       <div class="col-md-6">
-        <input type="text" class="form-control" name="name" required>
+        <input type="text" class="form-control" name="name" value="{{{eatplace.name}}}">
       </div>
     </div>
     <div class="form-group row">
       <label for="nameEn" class="col-sm-2 col-form-label">English name</label>
       <div class="col-md-6">
-        <input type="text" class="form-control" name="nameEn">
+        <input type="text" class="form-control" name="nameEn" value="{{{eatplace.name_en}}}">
       </div>
     </div>
     <div class="form-group row">
       <label for="category" class="col-sm-2 col-form-label">類別</label>
       <div class="col-md-6">
-        <input type="text" class="form-control" name="category">
+        <input type="text" class="form-control" name="category" value="{{{eatplace.category}}}">
       </div>
     </div>
     <div class="form-group row">
       <label for="image" class="col-sm-2 col-form-label">圖片連結</label>
       <div class="col-md-6">
-        <input type="text" class="form-control" name="image"
-          value="https://lh3.googleusercontent.com/tja44Ko_AyRDzapxWFtXWqFIhYZzCnOARZSzI0lZ0y7PFHcchBr-E6pncz2ht1mz4C_Y3CWn1mt690CqbWW8e0EjbTWzKYLeRJ7hOOPTIDtxXUiY48vUmDBVUkm3iQiLnaSfVt3eVdXz6tU9VO_n1v3wG_-wMP2HzkleOvHCaArtkAIQVLUYGkuZ80W53fVyZFIG1nOApVca4pZENILxnF-U27Vx6d8KW_u4UtJjSjLqDCV78C55Vc83woIjh20l7cf_JBHoCTuOEQaRVgw82gq67RgwepmgGofJ7xdAsN0FheW_bSa_AuZp6Uxx3p_tnc5ncv9urFh_UNxOjVtaBUV1FzHAkyn2k3eQ4cJM7RqqptTT7xXlWgSwn9M6tNXPjmZrmGX5xSoCumVlcTLOyYifIQF05_JI87qVM7L-U0EDe5CNioAd2F1YETqhv9STilzUG2bVufse4kbuYCE9D1mdFsH8fI9OhyVa3MePzB-k1Ov0HSdx1zd19YPGzYc4KSqYqOACs50lZJlqxQOsSjejyQKIPQ4v5Dzjt9ZxcSgFcA51yGgoUZCR2o-ijX5yNwMtOz9-Wgr2RiQBM8tguHzKz0Hh5V4eU4cfW4kN1jzw0ZUTe1edShO3XrcnbtvtDE-LlMV6Kr6IADydyeaMBwFK-3vbMCWmlqMQuYyg87XjU0g=w1046-h784-no">
+        <input type="text" class="form-control" name="image" value="{{{eatplace.image}}}">
       </div>
     </div>
     <div class="form-group row">
       <label for="location" class="col-sm-2 col-form-label">地址</label>
       <div class="col-md-6">
-        <input type="text" class="form-control" name="location">
+        <input type="text" class="form-control" name="location" value="{{{eatplace.location}}}">
       </div>
     </div>
     <div class="form-group row">
       <label for="phone" class="col-sm-2 col-form-label">電話</label>
       <div class="col-md-6">
-        <input type="text" class="form-control" name="phone">
+        <input type="text" class="form-control" name="phone" value="{{{eatplace.phone}}}">
       </div>
     </div>
     <div class="form-group row">
       <label for="googleMap" class="col-sm-2 col-form-label">Google_map</label>
       <div class="col-md-6">
-        <input type="text" class=" form-control" name="googleMap">
+        <input type="text" class=" form-control" name="googleMap" value="{{{eatplace.google_map}}}">
       </div>
     </div>
     <div class="form-group row">
       <label for="rating" class="col-sm-2 col-form-label">Rating</label>
       <div class="col-md-6">
-        <input type="text" class="form-control" name="rating">
+        <input type="text" class="form-control" name="rating" value="{{{eatplace.rating}}}">
       </div>
     </div>
     <div class="form-group row">
       <label for="description" class="col-sm-2 col-form-label">Description</label>
       <div class="col-md-6">
-        <textarea class="form-control" name="description"></textarea>
+        <textarea class="form-control" name="description">{{{eatplace.description}}}</textarea>
       </div>
     </div>
     <div class="form-group row">
       <div class="col-md-8">
-        <a href="/" class="btn btn-secondary">Back</a>
-        <button type="submit" class="btn btn-primary float-right">Submit</button>
+        <a href="/" class="btn btn-secondary">Home</a>
+        <button type="submit" class="btn btn-primary float-right">Confirm Edit</button>
       </div>
     </div>
   </form>
