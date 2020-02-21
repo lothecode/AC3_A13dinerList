@@ -11,6 +11,7 @@ router.get('/', (req, res) => {
 router.get('/create', (req, res) => {
   res.render('new')
 })
+
 router.post('/create', (req, res) => {
   // console.log(req.body)
   const eatplace = new Eatplace({
@@ -25,7 +26,7 @@ router.post('/create', (req, res) => {
     description: req.body.description,
   })
   eatplace.save((err) => {
-    if (err) return console.log(err)
+    if (err) return console.error(err)
     return res.redirect('/')
   })
 })
@@ -35,20 +36,20 @@ router.get('/:id', (req, res) => {
   // console.log(req.params)
   // let id = req.params.id.toString()
   Eatplace.findById(req.params.id, (err, eatplace) => {
-    if (err) return console.log(err)
+    if (err) return console.error(err)
     return res.render('show', { eatplace: eatplace })
   })
 })
 // edit one
 router.get('/:id/edit', (req, res) => {
   Eatplace.findById(req.params.id, (err, eatplace) => {
-    if (err) return console.log(err)
+    if (err) return console.error(err)
     return res.render('edit', { eatplace: eatplace })
   })
 })
 router.put('/:id', (req, res) => {
   Eatplace.findById(req.params.id, (err, eatplace) => {
-    if (err) return console.log(err)
+    if (err) return console.error(err)
     eatplace.name = req.body.name,
       eatplace.name_en = req.body.nameEn,
       eatplace.category = req.body.category,
@@ -59,7 +60,7 @@ router.put('/:id', (req, res) => {
       eatplace.rating = req.body.rating,
       eatplace.description = req.body.description,
       eatplace.save((err) => {
-        if (err) return console.log(err)
+        if (err) return console.error(err)
         return res.redirect(`/places/${req.params.id}`)
       })
   })
@@ -68,10 +69,11 @@ router.put('/:id', (req, res) => {
 // delete one
 router.delete('/:id/delete', (req, res) => {
   Eatplace.findById(req.params.id, (err, eatplace) => {
-    if (err) return console.log(err)
+    if (err) return console.error(err)
     eatplace.remove()
     return res.redirect('/')
   })
 })
+
 
 module.exports = router
