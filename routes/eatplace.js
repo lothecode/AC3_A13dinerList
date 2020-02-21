@@ -75,5 +75,31 @@ router.delete('/:id/delete', (req, res) => {
   })
 })
 
+router.get('/sort/:order', (req, res) => {
+  const order = req.params.order
+  if (order === 'asc' || order === 'desc') {
+    Eatplace.find()
+      .sort({ name: `${req.params.order}` })
+      .exec((err, eatplaces) => {
+        if (err) return console.error(err)
+        return res.render('index', { eatplaces: eatplaces })
+      })
+  } else if (order === 'rating') {
+    Eatplace.find()
+      .sort({ rating: 'desc' })
+      .exec((err, eatplaces) => {
+        if (err) return console.error(err)
+        return res.render('index', { eatplaces: eatplaces })
+      })
+  } else if (order === 'category') {
+    Eatplace.find()
+      .sort({ category: 'desc' })
+      .exec((err, eatplaces) => {
+        if (err) return console.error(err)
+        return res.render('index', { eatplaces: eatplaces })
+      })
+  }
+})
+
 
 module.exports = router

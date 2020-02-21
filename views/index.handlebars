@@ -25,10 +25,11 @@
           Sort by ...
         </a>
         <div class="dropdown-menu" aria-labelledby="dropdownMenu">
-          <a class="dropdown-item" href="/1">名稱(A->Z)</a>
-          <a class="dropdown-item" href="/2">名稱(Z->A)</a>
-          <a class="dropdown-item" href="/3">評價(高->低)</a>
-          <a class="dropdown-item" href="/4">類別(A->Z)</a>
+          <a class="dropdown-item" href="/places/sort/asc">名稱(A->Z)</a>
+          {{!-- sort/後面的就是在route定義的sort/:order --}}
+          <a class="dropdown-item" href="/places/sort/desc">名稱(Z->A)</a>
+          <a class="dropdown-item" href="/places/sort/rating">評價(高->低)</a>
+          <a class="dropdown-item" href="/places/sort/category">類別(A->Z)</a>
         </div>
       </div>
     </div>
@@ -37,7 +38,7 @@
 </div>
 
 <!-- restaurant list -->
-<div class="container mt-5">
+<div class=" container mt-5">
   <div class="mb-2">
     <a href="/places/create" class="btn btn-outline-success">加入一個新的餐廳</a>
   </div>
