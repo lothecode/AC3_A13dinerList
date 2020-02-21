@@ -7,9 +7,7 @@ const exphbs = require('express-handlebars')
 const { allowInsecurePrototypeAccess } = require('@handlebars/allow-prototype-access')
 const Eatplace = require('./model/eatplace')
 const bodyParser = require('body-parser')
-app.use(express.static('public'))
-
-
+const methodOverride = require('method-override')
 mongoose.connect('mongodb://localhost/eatplace', { useNewUrlParser: true, useUnifiedTopology: true })
 const db = mongoose.connection
 
@@ -19,7 +17,9 @@ db.once('open', () => { console.log('mongodb connected!') })
 
 app.engine('handlebars', exphbs({ defaultLayout: 'main', handlebars: allowInsecurePrototypeAccess(Handlebars) }))
 app.set('view engine', 'handlebars')
+app.use(express.static('public'))
 app.use(bodyParser.urlencoded({ extended: true }))
+app.use(methodOverride('_method'))
 
 // routes
 // home
@@ -74,7 +74,7 @@ app.get('/places/:id/edit', (req, res) => {
     return res.render('edit', { eatplace: eatplace })
   })
 })
-app.post('/places/:id', (req, res) => {
+app.put('/places/:id', (req, res) => {
   Eatplace.findById(req.params.id, (err, eatplace) => {
     if (err) return console.log(err)
     eatplace.name = req.body.name,
@@ -94,7 +94,7 @@ app.post('/places/:id', (req, res) => {
 })
 
 // delete one
-app.post('/places/:id/delete', (req, res) => {
+app.delete('/places/:id/delete', (req, res) => {
   Eatplace.findById(req.params.id, (err, eatplace) => {
     if (err) return console.log(err)
     eatplace.remove()

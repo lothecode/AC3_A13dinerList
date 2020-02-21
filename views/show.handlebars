@@ -36,7 +36,7 @@
       <p class="mb-5">
         {{eatplace.description}}
       </p>
-      <form action="/places/{{{eatplace.id}}}/delete" method="POST" class="mb-2">
+      <form action="/places/{{{eatplace.id}}}/delete?_method=DELETE" method="POST" class="mb-2">
         <a href="/" class="btn btn-secondary">Home</a>
         <a href="/places/{{{eatplace.id}}}/edit" class="btn btn-secondary">Edit</a>
         <button type="submit" class="btn btn-warning">Delete</button>
