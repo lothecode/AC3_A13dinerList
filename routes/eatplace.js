@@ -33,8 +33,6 @@ router.post('/create', (req, res) => {
 
 // see one's detail
 router.get('/:id', (req, res) => {
-  // console.log(req.params)
-  // let id = req.params.id.toString()
   Eatplace.findById(req.params.id, (err, eatplace) => {
     if (err) return console.error(err)
     return res.render('show', { eatplace: eatplace })
@@ -75,6 +73,7 @@ router.delete('/:id/delete', (req, res) => {
   })
 })
 
+// sort function
 router.get('/sort/:order', (req, res) => {
   const order = req.params.order
   if (order === 'asc' || order === 'desc') {

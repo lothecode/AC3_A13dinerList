@@ -5,7 +5,7 @@ const mongoose = require('mongoose')
 const port = 3000
 const exphbs = require('express-handlebars')
 const { allowInsecurePrototypeAccess } = require('@handlebars/allow-prototype-access')
-const Eatplace = require('./model/eatplace')
+const Eatplace = require('./model/eatplace') //move the related to /model/eatplace.js 
 const bodyParser = require('body-parser')
 const methodOverride = require('method-override')
 mongoose.connect('mongodb://localhost/eatplace', { useNewUrlParser: true, useUnifiedTopology: true })
