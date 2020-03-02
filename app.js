@@ -8,12 +8,17 @@ const { allowInsecurePrototypeAccess } = require('@handlebars/allow-prototype-ac
 const Eatplace = require('./model/eatplace') //move the related to /model/eatplace.js 
 const bodyParser = require('body-parser')
 const methodOverride = require('method-override')
+const session = require('express-session')
 mongoose.connect('mongodb://localhost/eatplace', { useNewUrlParser: true, useUnifiedTopology: true })
 const db = mongoose.connection
 
 db.on('error', () => { console.log('mongodb error!') })
 db.once('open', () => { console.log('mongodb connected!') })
-
+app.use(session({
+  secret: 'secret codehere',
+  resave: false,
+  saveUninitialized: true
+}))
 
 app.engine('handlebars', exphbs({ defaultLayout: 'main', handlebars: allowInsecurePrototypeAccess(Handlebars) }))
 app.set('view engine', 'handlebars')
