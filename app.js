@@ -24,7 +24,7 @@ app.use(methodOverride('_method'))
 // routes
 app.use('/', require('./routes/home'))
 app.use('/places', require('./routes/eatplace'))
-
+app.use('/users', require('./routes/user'))
 
 app.listen(port, () => {
   console.log('express app is running')
