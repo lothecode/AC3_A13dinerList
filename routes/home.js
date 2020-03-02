@@ -5,7 +5,7 @@ const { authenticated } = require('../config/auth')
 
 // home
 router.get('/', authenticated, (req, res) => {
-  Eatplace.find((err, eatplaces) => {
+  Eatplace.find({ userId: req.user._id }, (err, eatplaces) => {
     if (err) return console.error(err)
     return res.render('index', { eatplaces: eatplaces })
   })

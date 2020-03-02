@@ -24,6 +24,7 @@ router.post('/create', authenticated, (req, res) => {
     google_map: req.body.googleMap,
     rating: req.body.rating,
     description: req.body.description,
+    userId: req.user._id
   })
   eatplace.save((err) => {
     if (err) return console.error(err)
@@ -33,14 +34,14 @@ router.post('/create', authenticated, (req, res) => {
 
 // see one's detail
 router.get('/:id', authenticated, (req, res) => {
-  Eatplace.findById(req.params.id, (err, eatplace) => {
+  Eatplace.findOne({ _id: req.params.id, userId: req.user._id }, (err, eatplace) => {
     if (err) return console.error(err)
     return res.render('show', { eatplace: eatplace })
   })
 })
 // edit one
 router.get('/:id/edit', authenticated, (req, res) => {
-  Eatplace.findById(req.params.id, (err, eatplace) => {
+  Eatplace.findOne({ _id: req.params.id, userId: req.user._id }, (err, eatplace) => {
     if (err) return console.error(err)
     return res.render('edit', { eatplace: eatplace })
   })
@@ -66,7 +67,7 @@ router.put('/:id', authenticated, (req, res) => {
 
 // delete one
 router.delete('/:id/delete', authenticated, (req, res) => {
-  Eatplace.findById(req.params.id, (err, eatplace) => {
+  Eatplace.findOne({ _id: req.params.id, userId: req.user._id }, (err, eatplace) => {
     if (err) return console.error(err)
     eatplace.remove()
     return res.redirect('/')
@@ -77,21 +78,21 @@ router.delete('/:id/delete', authenticated, (req, res) => {
 router.get('/sort/:order', authenticated, (req, res) => {
   const order = req.params.order
   if (order === 'asc' || order === 'desc') {
-    Eatplace.find()
+    Eatplace.find({ userId: req.user._id })
       .sort({ name: `${req.params.order}` })
       .exec((err, eatplaces) => {
         if (err) return console.error(err)
         return res.render('index', { eatplaces: eatplaces })
       })
   } else if (order === 'rating') {
-    Eatplace.find()
+    Eatplace.find({ userId: req.user._id })
       .sort({ rating: 'desc' })
       .exec((err, eatplaces) => {
         if (err) return console.error(err)
         return res.render('index', { eatplaces: eatplaces })
       })
   } else if (order === 'category') {
-    Eatplace.find()
+    Eatplace.find({ userId: req.user._id })
       .sort({ category: 'desc' })
       .exec((err, eatplaces) => {
         if (err) return console.error(err)
