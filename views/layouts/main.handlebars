@@ -10,7 +10,7 @@
     integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
   <link rel="stylesheet" href="/stylesheets/style.css">
 
-  <title>Eatplace</title>
+  <title>Eatplace list</title>
 </head>
 
 <body>
@@ -23,12 +23,18 @@
             width="30" height="30" class="d-inline-block align-top" alt="我的餐廳清單">
           我的餐廳清單
         </a>
+        {{#if isAuthenticated}}
+        <a href="/users/logout" class="btn btn-outline-info">Logout</a>
+        {{else}}
+        <a href="/users/login" class="btn btn-outline-info">Login</a>
+        {{/if}}
       </div>
     </nav>
-    <div class="banner"></div>
+    <div class=" banner"></div>
   </header>
 
   {{{body}}}
+
 
   {{!-- bootstrap js --}}
   <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
