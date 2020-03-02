@@ -1,18 +1,18 @@
 const express = require('express')
 const router = express.Router()
 const Eatplace = require('../model/eatplace')
-
+const { authenticated } = require('../config/auth')
 // list all
-router.get('/', (req, res) => {
+router.get('/', authenticated, (req, res) => {
   return res.redirect('/')
 })
 
 // create new one (to new page)
-router.get('/create', (req, res) => {
+router.get('/create', authenticated, (req, res) => {
   res.render('new')
 })
 
-router.post('/create', (req, res) => {
+router.post('/create', authenticated, (req, res) => {
   // console.log(req.body)
   const eatplace = new Eatplace({
     name: req.body.name,
@@ -32,20 +32,20 @@ router.post('/create', (req, res) => {
 })
 
 // see one's detail
-router.get('/:id', (req, res) => {
+router.get('/:id', authenticated, (req, res) => {
   Eatplace.findById(req.params.id, (err, eatplace) => {
     if (err) return console.error(err)
     return res.render('show', { eatplace: eatplace })
   })
 })
 // edit one
-router.get('/:id/edit', (req, res) => {
+router.get('/:id/edit', authenticated, (req, res) => {
   Eatplace.findById(req.params.id, (err, eatplace) => {
     if (err) return console.error(err)
     return res.render('edit', { eatplace: eatplace })
   })
 })
-router.put('/:id', (req, res) => {
+router.put('/:id', authenticated, (req, res) => {
   Eatplace.findById(req.params.id, (err, eatplace) => {
     if (err) return console.error(err)
     eatplace.name = req.body.name,
@@ -65,7 +65,7 @@ router.put('/:id', (req, res) => {
 })
 
 // delete one
-router.delete('/:id/delete', (req, res) => {
+router.delete('/:id/delete', authenticated, (req, res) => {
   Eatplace.findById(req.params.id, (err, eatplace) => {
     if (err) return console.error(err)
     eatplace.remove()
@@ -74,7 +74,7 @@ router.delete('/:id/delete', (req, res) => {
 })
 
 // sort function
-router.get('/sort/:order', (req, res) => {
+router.get('/sort/:order', authenticated, (req, res) => {
   const order = req.params.order
   if (order === 'asc' || order === 'desc') {
     Eatplace.find()

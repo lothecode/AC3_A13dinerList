@@ -1,15 +1,16 @@
 const express = require('express')
 const router = express.Router()
 const Eatplace = require('../model/eatplace')
+const { authenticated } = require('../config/auth')
 
 // home
-router.get('/', (req, res) => {
+router.get('/', authenticated, (req, res) => {
   Eatplace.find((err, eatplaces) => {
     if (err) return console.error(err)
     return res.render('index', { eatplaces: eatplaces })
   })
 })
-router.get('/search', (req, res) => {
+router.get('/search', authenticated, (req, res) => {
   console.log(req.query.keyword)
   // const searchKW = req.query.keyword
   Eatplace.find((err, eatplaces) => {
