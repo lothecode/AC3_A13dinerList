@@ -9,6 +9,7 @@ const Eatplace = require('./model/eatplace') //move the related to /model/eatpla
 const bodyParser = require('body-parser')
 const methodOverride = require('method-override')
 const session = require('express-session')
+const passport = require('passport')
 mongoose.connect('mongodb://localhost/eatplace', { useNewUrlParser: true, useUnifiedTopology: true })
 const db = mongoose.connection
 
@@ -26,6 +27,15 @@ app.use(express.static('public'))
 app.use(bodyParser.urlencoded({ extended: true }))
 app.use(methodOverride('_method'))
 
+app.use(passport.initialize())
+app.use(passport.session())
+
+require('./config/passport')(passport)
+
+app.use((req, res, next) => {
+  res.locals.user = req.user
+  next()
+})
 // routes
 app.use('/', require('./routes/home'))
 app.use('/places', require('./routes/eatplace'))

@@ -1,5 +1,6 @@
 const express = require('express')
 const router = express.Router()
+const passport = require('passport')
 const User = require('../model/user')
 const mongoose = require('mongoose')
 
@@ -7,11 +8,13 @@ const mongoose = require('mongoose')
 router.get('/login', (req, res) => {
   res.render('login')
 })
+
 // login submit
-
-router.post('/login', (req, res) => {
-  console.log(req.body)
-
+router.post('/login', (req, res, next) => {
+  passport.authenticate('local', {// 使用 passport 認證
+    successRedirect: '/',
+    failureRedirect: '/users/login'
+  })(req, res, next)
 })
 
 // register
